@@ -13,6 +13,7 @@ The application requires macOS 11 or higher and a downloaded macOS installer wit
 ## Support installer
 
 - Im using Mac M1, I can create Macos Monterey, Bigsur, Ventura, Sonoma
+- I don't have any other mac to test with older macOS.
 
 ## Requirements
 

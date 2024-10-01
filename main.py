@@ -19,6 +19,9 @@ from kivy.clock import Clock, mainthread
 from kivy.core.window import Window
 from kivy.resources import resource_add_path
 import traceback
+from kivy.config import Config
+# Disable multitouch emulation (red dot)
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
 class BM(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -122,10 +125,10 @@ class BM(MDApp):
                                 # Show password dialog only when prompted
                                 #print('Asking for sudo password')
                                 self.password_prompt_shown = True
-                                self.show_password_prompt(self.process, lambda password: self.send_sudo_password(password, master_fd))
+                                self.show_password_prompt(lambda password: self.send_sudo_password(password, master_fd))
                             if 'incorrect' in output.lower() or 'failed' in output.lower():
                                 self.password_prompt_shown = True
-                                self.show_password_prompt(self.process, lambda password: self.send_sudo_password(password, master_fd))
+                                self.show_password_prompt(lambda password: self.send_sudo_password(password, master_fd))
                             # Check if the process is asking for confirmation (yes/no)
                             if 'continue' in output.lower() or 'yes/no' in output.lower():
                                 #print('Asking for confirmation')
@@ -179,7 +182,7 @@ class BM(MDApp):
             self.password_prompt_shown = False  # Reset the password prompt flag
 
     @mainthread
-    def show_password_prompt(self, process, on_submit):
+    def show_password_prompt(self, on_submit):
         """Show a dialog for entering the sudo password."""
         def on_submit_action(**instance):
             password = text_field.text.strip()  # Get password            
