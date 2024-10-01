@@ -32,7 +32,9 @@ class BM(MDApp):
         self.process = None
         self.password_prompt_shown = False
         self.spiner = MDSpinner(active=False, size_hint=(None, None), size=(30, 30),pos_hint={'center_x':0.5, 'center_y':0.5})
-        self.create_btn = MDRaisedButton(text='Create',  pos_hint={'center_x':0.5, 'center_y':0.5}, padding=[10], font_size=dp(20),font_name=self.robofont())
+        self.create_btn = MDRaisedButton(text='Create',  pos_hint={'center_x':0.5, 'center_y':0.5}, padding=[10], font_size=dp(18))
+        self.cancel = MDRaisedButton(text='Abort',  pos_hint={'center_x':0.5, 'center_y':0.5}, padding=[10], font_size=dp(18),md_bg_color=(1,0,0,1), on_release=lambda x: self.cancel_command())
+        
     def robofont(self):
         return 'RobotoMono-Regular'
     def build(self):
@@ -40,7 +42,14 @@ class BM(MDApp):
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = "Indigo"
 
-        
+        self.create = MDBoxLayout(
+            self.create_btn,
+            self.spiner,
+            orientation='horizontal',            
+            pos_hint={'center_x':0.5, 'center_y':0.5},
+            size_hint = (0.3, 0.2),            
+            spacing=dp(20)
+        )
         # Create a ScrollView for the output
         self.output_label = MDTextField(
             text='Process output..\n', 
@@ -61,33 +70,34 @@ class BM(MDApp):
         )
         
         self.create_btn.bind(on_press=self.show_command)
-        create = MDBoxLayout(
-            self.create_btn,
-            self.spiner,
-            orientation='horizontal',            
-            pos_hint={'center_x':0.5, 'center_y':0.5},
-            size_hint = (0.3, 0.2),
-            
-            spacing=dp(20)
-        )
+
         layout = MDBoxLayout(
             self.setting(),
-            create,
+            self.create,
             scroll_view,
             pos_hint={'center_x':0.5, 'center_y':0.5},
             orientation='vertical'
         )
         return layout
-
+    @mainthread
+    def start_cmd(self):
+        self.spiner.active= True
+        self.create_btn.disabled=True
+        self.create.add_widget(self.cancel)
+    @mainthread
+    def stop_cmd(self):
+        self.spiner.active= False
+        self.create_btn.disabled=False
+        self.create.remove_widget(self.cancel)
     @multitasking.task
     def execute_command(self, command):
-        self.spiner.active= True
+        self.start_cmd()
         sudo_command = ['sudo', '-S'] + command
         #print(f'Executing command: {sudo_command}')
         print(f'Executing...')
         self.update_output_label(f'Executing...')
         time.sleep(0.2)
-        self.create_btn.disabled=True
+        
         try:
             # Create a pseudo-terminal
             master_fd, slave_fd = pty.openpty()
@@ -130,8 +140,8 @@ class BM(MDApp):
             self.password_prompt_shown = False
             os.close(master_fd)
             self.update_output_label("Process finished.\n")
-            self.spiner.active= False
-            self.create_btn.disabled=False
+            
+            self.stop_cmd()
         except Exception as e:
             print(f"Execution error: {e}")
             self.update_output_label(f"Error: {str(e)}")
