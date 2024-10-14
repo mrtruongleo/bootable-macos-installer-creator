@@ -1,0 +1,20 @@
+<WIN>:
+    name: 'win'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20,0,20,0]
+        #pos_hint: {'center_x':0.5, 'center_y':0.5}
+        size_hint: 1,1
+        MDTopAppBar:
+            id: top_bar
+            title: "Create Windows installer"
+            md_bg_color:  0,0,0,0.00001
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: app.goto('home','right')]]  # Back button
+            #right_action_items: [["home", lambda x: app.goto('image_loader','right')]]  # Back button
+            size_hint_y: 0.1
+            pos_hint: {'top':1}
+        BoxLayout:
+            id: win_content
+            orientation: 'vertical'
+            pos_hint:{'center_x':0.5, 'center_y':0.5}

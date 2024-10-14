@@ -15,7 +15,7 @@ if sys.platform == 'win32':
     from kivy_deps import sdl2, glew
     sdl2_path = sdl2.dep_bins
     glew_path = glew.dep_bins
-    icon_file = 'icon.png'  # Windows uses .ico files for icons
+    icon_file = 'icon.ico'  # Windows uses .ico files for icons
     # binaries += [*sdl2_path, *glew_path]
     trees = [Tree(p) for p in (sdl2.dep_bins + glew.dep_bins)]
 else:
@@ -30,7 +30,9 @@ else:
         (glew_path, os.path.basename(glew_path))
     ]
     trees = []
-
+datas += [
+    ('kv/*.kv', 'kv/')
+]
 a = Analysis(
     ['main.py'],
     pathex=[],

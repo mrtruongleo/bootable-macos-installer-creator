@@ -1,0 +1,18 @@
+<MAC>:
+    name: 'mac'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20,0,20,0]
+        size_hint: 1,1
+        #pos_hint: {'center_x':0.5, 'center_y':0.5}
+        MDTopAppBar:
+            id: top_bar
+            title: "Create MacOS installer"
+            md_bg_color:  0,0,0,0.00001
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: app.goto('home','right')]]  # Back button  
+            size_hint_y: 0.1
+            pos_hint: {'top':1}
+        BoxLayout:
+            id: mac_content
+            orientation: 'vertical'

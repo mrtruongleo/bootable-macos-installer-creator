@@ -1,0 +1,42 @@
+<Home>:
+    name: 'home'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [10,0,10,0]
+        size_hint: 1,1
+        MDTopAppBar:
+            id: title
+            title: "Create MacOS/Windows installer"
+            md_bg_color:  0,0,0,0.00001
+            elevation: 0
+            size_hint_y: 0.1
+            pos_hint: {'top':1}
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: 40
+            #size_hint_y: 0.8
+            size_hint: 1, 0.3
+            pos_hint: {'center_x':0.5, 'center_y':0.5}
+            MDRectangleFlatButton:
+                text: "Create MacOS Installer"
+                on_release: app.goto('mac')
+                pos_hint: {'center_x':0.5, 'center_y':0.5}
+                padding: 20
+                font_size: dp(20)
+            MDRectangleFlatButton:
+                text: "Create Windows Installer"
+                on_release: app.goto('win')
+                pos_hint: {'center_x':0.5, 'center_y':0.5}
+                padding: 20
+                font_size: dp(20)
+        #@Widget:        
+        MDLabel:
+            id: info
+            multiline: True
+            font_size: dp(14)
+            #font_weight: "bold"
+            #halign: "center"
+            size_hint: 1, 0.4
+            disabled: True
+            padding: [20]
+            font_name: app.robofont()

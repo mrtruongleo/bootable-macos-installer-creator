@@ -2,12 +2,12 @@
 
 ![Preview](https://github.com/mrtruongleo/bootable-macos-installer-creator/blob/main/screen.jpg)
 
-This Kivy application allows you to create a bootable macOS installer for USB drives or hard disk partitions.
-The application requires macOS 11 or higher and a downloaded macOS installer with the `.app` extension.
+This Kivy application allows you to create a bootable macOS/Windows installer for USB drives or hard disk partitions.
 
 ## Features
 
 - Create a bootable macOS installer from a downloaded macOS installer.
+- Support create windows installer too.
 - Support for USB drives and HDD partitions.
 - User-friendly interface built with Kivy.
 - Simple app
@@ -21,7 +21,8 @@ The application requires macOS 11 or higher and a downloaded macOS installer wit
 
 - macOS 11 (Big Sur) or higher
 - A downloaded macOS installer in `.app` format. You can download macOS installers from the Mac App Store.
-- A USB drive or hard disk partition formatted as APFS or Mac OS Extended (Journaled).
+- A USB drive or hard disk partition formatted as APFS or Mac OS Extended (Journaled) (for mac installer).
+- Homebrew installed, then install wimlib (brew install wimblib) for working with windows installer.
 
 ## Installation
 

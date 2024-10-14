@@ -1,32 +1,41 @@
-Properties ['color'] passed to __init__ may not be existing property names. Valid properties are ['_anim_raised', '_animation_fade_bg', '_default_icon_color', '_default_text_color', '_default_theme_icon_color', '_default_theme_text_color', '_disabled_color', '_doing_ripple', '_elevation_raised', '_fading_out', '_finishing_ripple', '_icon_color', '_line_color', '_line_color_disabled', '_md_bg_color', '_md_bg_color_disabled', '_min_height', '_min_width', '_no_ripple_effect', '_radius', '_ripple_rad', '_round_rad', '_text_color', '_theme_icon_color', '_theme_text_color', 'always_release', 'anchor_x', 'anchor_y', 'center', 'center_x', 'center_y', 'children', 'cls', 'device_ios', 'disabled', 'disabled_color', 'elevation', 'font_name', 'font_size', 'font_style', 'halign', 'height', 'icon', 'icon_color', 'icon_size', 'id', 'ids', 'last_touch', 'lbl_txt', 'line_color', 'line_color_disabled', 'line_width', 'md_bg_color', 'md_bg_color_disabled', 'min_state_time', 'motion_filter', 'opacity', 'opposite_colors', 'padding', 'parent', 'pos', 'pos_hint', 'right', 'ripple_alpha', 'ripple_canvas_after', 'ripple_color', 'ripple_duration_in_fast', 'ripple_duration_in_slow', 'ripple_duration_out', 'ripple_func_in', 'ripple_func_out', 'ripple_rad_default', 'ripple_scale', 'rotate_value_angle', 'rotate_value_axis', 'rounded_button', 'scale_value_center', 'scale_value_x', 'scale_value_y', 'scale_value_z', 'shadow_color', 'shadow_offset', 'shadow_radius', 'shadow_softness', 'shadow_softness_size', 'size', 'size_hint', 'size_hint_max', 'size_hint_max_x', 'size_hint_max_y', 'size_hint_min', 'size_hint_min_x', 'size_hint_min_y', 'size_hint_x', 'size_hint_y', 'state', 'text', 'text_color', 'theme_cls', 'theme_icon_color', 'theme_text_color', 'top', 'valign', 'widget_style', 'width', 'x', 'y']: 
+Cannot add <kivymd.uix.button.button.MDRaisedButton object at 0x157942dc0>, it already has a parent <kivymd.uix.boxlayout.MDBoxLayout object at 0x11f88a0a0>: 
 Traceback (most recent call last):
-  File "kivy/_event.pyx", line 235, in kivy._event.EventDispatcher.__init__
-TypeError: object.__init__() takes exactly one argument (the instance to initialize)
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/main.py", line 318, in <module>
-    app = BM()
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/main.py", line 36, in __init__
-    self.cancel = MDRaisedButton(text='Cancel',  pos_hint={'center_x':0.5, 'center_y':0.5}, padding=[10], font_size=dp(20),font_name=self.robofont(),color=(1,0,1), on_release=lambda x: self.cancel_command())
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivymd/uix/button/button.py", line 1316, in __init__
-    super().__init__(*args, **kwargs)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivymd/uix/button/button.py", line 955, in __init__
-    super().__init__(*args, **kwargs)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivymd/uix/behaviors/declarative_behavior.py", line 311, in __init__
-    super().__init__(**kwargs)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivymd/theming.py", line 1670, in __init__
-    super().__init__(**kwargs)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/behaviors/button.py", line 121, in __init__
-    super(ButtonBehavior, self).__init__(**kwargs)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/anchorlayout.py", line 68, in __init__
-    super(AnchorLayout, self).__init__(**kwargs)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/layout.py", line 76, in __init__
-    super(Layout, self).__init__(**kwargs)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivymd/uix/button/button.py", line 1172, in __init__
-    super().__init__(**kwargs)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/widget.py", line 357, in __init__
-    super(Widget, self).__init__(**kwargs)
-  File "kivy/_event.pyx", line 238, in kivy._event.EventDispatcher.__init__
-TypeError: Properties ['color'] passed to __init__ may not be existing property names. Valid properties are ['_anim_raised', '_animation_fade_bg', '_default_icon_color', '_default_text_color', '_default_theme_icon_color', '_default_theme_text_color', '_disabled_color', '_doing_ripple', '_elevation_raised', '_fading_out', '_finishing_ripple', '_icon_color', '_line_color', '_line_color_disabled', '_md_bg_color', '_md_bg_color_disabled', '_min_height', '_min_width', '_no_ripple_effect', '_radius', '_ripple_rad', '_round_rad', '_text_color', '_theme_icon_color', '_theme_text_color', 'always_release', 'anchor_x', 'anchor_y', 'center', 'center_x', 'center_y', 'children', 'cls', 'device_ios', 'disabled', 'disabled_color', 'elevation', 'font_name', 'font_size', 'font_style', 'halign', 'height', 'icon', 'icon_color', 'icon_size', 'id', 'ids', 'last_touch', 'lbl_txt', 'line_color', 'line_color_disabled', 'line_width', 'md_bg_color', 'md_bg_color_disabled', 'min_state_time', 'motion_filter', 'opacity', 'opposite_colors', 'padding', 'parent', 'pos', 'pos_hint', 'right', 'ripple_alpha', 'ripple_canvas_after', 'ripple_color', 'ripple_duration_in_fast', 'ripple_duration_in_slow', 'ripple_duration_out', 'ripple_func_in', 'ripple_func_out', 'ripple_rad_default', 'ripple_scale', 'rotate_value_angle', 'rotate_value_axis', 'rounded_button', 'scale_value_center', 'scale_value_x', 'scale_value_y', 'scale_value_z', 'shadow_color', 'shadow_offset', 'shadow_radius', 'shadow_softness', 'shadow_softness_size', 'size', 'size_hint', 'size_hint_max', 'size_hint_max_x', 'size_hint_max_y', 'size_hint_min', 'size_hint_min_x', 'size_hint_min_y', 'size_hint_x', 'size_hint_y', 'state', 'text', 'text_color', 'theme_cls', 'theme_icon_color', 'theme_text_color', 'top', 'valign', 'widget_style', 'width', 'x', 'y']
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/main.py", line 74, in <module>
+    app.run()
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/app.py", line 956, in run
+    runTouchApp()
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/base.py", line 574, in runTouchApp
+    EventLoop.mainloop()
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/base.py", line 339, in mainloop
+    self.idle()
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/base.py", line 379, in idle
+    Clock.tick()
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/clock.py", line 733, in tick
+    self.post_idle(ts, self.idle())
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/clock.py", line 776, in post_idle
+    self._process_events()
+  File "kivy/_clock.pyx", line 620, in kivy._clock.CyClockBase._process_events
+  File "kivy/_clock.pyx", line 653, in kivy._clock.CyClockBase._process_events
+  File "kivy/_clock.pyx", line 649, in kivy._clock.CyClockBase._process_events
+  File "kivy/_clock.pyx", line 218, in kivy._clock.ClockEvent.tick
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/animation.py", line 370, in _update
+    self.stop(widget)
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/animation.py", line 236, in stop
+    self.dispatch('on_complete', widget)
+  File "kivy/_event.pyx", line 727, in kivy._event.EventDispatcher.dispatch
+  File "kivy/_event.pyx", line 1307, in kivy._event.EventObservers.dispatch
+  File "kivy/_event.pyx", line 1231, in kivy._event.EventObservers._dispatch
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/screenmanager.py", line 419, in _on_complete
+    self.screen_in.dispatch('on_enter')
+  File "kivy/_event.pyx", line 731, in kivy._event.EventDispatcher.dispatch
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/screens/win.py", line 55, in on_enter
+    self.create = MDBoxLayout(
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivymd/uix/behaviors/declarative_behavior.py", line 315, in __init__
+    self.add_widget(child)
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/boxlayout.py", line 327, in add_widget
+    return super(BoxLayout, self).add_widget(widget, *args, **kwargs)
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/layout.py", line 97, in add_widget
+    super(Layout, self).add_widget(widget, *args, **kwargs)
+  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/widget.py", line 662, in add_widget
+    raise WidgetException('Cannot add %r, it already has a parent %r'
+kivy.uix.widget.WidgetException: Cannot add <kivymd.uix.button.button.MDRaisedButton object at 0x157942dc0>, it already has a parent <kivymd.uix.boxlayout.MDBoxLayout object at 0x11f88a0a0>
