@@ -1,6 +1,6 @@
 env
 build
 dist
-docs
+#docs
 Archive
-test
+#test
