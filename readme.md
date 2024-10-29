@@ -1,6 +1,3 @@
-Here’s a revised version of your README that includes the new features, requirements, notes, and a TODO list in Markdown format:
-
-```markdown
 # Bootable macOS Installer Creator
 
 ![Preview](https://github.com/mrtruongleo/bootable-macos-installer-creator/blob/main/screen.jpg)
