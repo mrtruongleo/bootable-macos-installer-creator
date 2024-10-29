@@ -31,7 +31,10 @@ else:
     ]
     trees = []
 datas += [
-    ('kv/*.kv', 'kv/')
+    ('kv/*.kv', 'kv/'),
+    ('exe/*.exe', 'exe/'),
+    ('exe/*.xml', 'exe/'),
+    (icon_file, '.')
 ]
 a = Analysis(
     ['main.py'],

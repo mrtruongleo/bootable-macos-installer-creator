@@ -1,8 +1,12 @@
-import pty
+try:
+    import pty
+except:
+    pass
 import sys
 import time, os
 from tkinter import filedialog
 from tkinter import *
+
 root = Tk()
 root.withdraw()
 import multitasking
@@ -21,40 +25,60 @@ from kivy.resources import resource_add_path
 import traceback
 from kivy.config import Config
 from kivy.uix.screenmanager import Screen
+
 # Disable multitouch emulation (red dot)
+
 
 class MAC(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.app = MDApp.get_running_app() 
+        self.app = MDApp.get_running_app()
         self.output_label = None
-        self.source_installer = '/Applications/Install macOS Sonoma.app'
-        self.target_volume = '/Volumes/sonoma'
+        self.source_installer = "/Applications/Install macOS Sonoma.app"
+        self.target_volume = "/Volumes/sonoma"
         self.command_thread = None
         self.dialog = None
         self.process = None
         self.password_prompt_shown = False
-        
-        
+
     def robofont(self):
-        return 'RobotoMono-Regular'
+        return "RobotoMono-Regular"
+
     def on_enter(self):
-        self.spiner = MDSpinner(active=False, size_hint=(None, None), size=(30, 30),pos_hint={'center_x':0.5, 'center_y':0.5})
-        self.create_btn = MDRaisedButton(text='Create',  pos_hint={'center_x':0.5, 'center_y':0.5}, padding=[10], font_size=dp(18))
-        self.cancel = MDRaisedButton(text='Abort',  pos_hint={'center_x':0.5, 'center_y':0.5}, padding=[10], font_size=dp(18),md_bg_color=(1,0,0,1), on_release=lambda x: self.cancel_command())
-        
+        self.spiner = MDSpinner(
+            active=False,
+            size_hint=(None, None),
+            size=(30, 30),
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+        )
+        self.create_btn = MDRaisedButton(
+            text="Create",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            padding=[10],
+            font_size=dp(18),
+        )
+        self.cancel = MDRaisedButton(
+            text="Abort",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            padding=[10],
+            font_size=dp(18),
+            md_bg_color=(1, 0, 0, 1),
+            on_release=lambda x: self.cancel_command(),
+        )
+
         self.create = MDBoxLayout(
             self.create_btn,
             self.spiner,
-            orientation='horizontal',            
-            pos_hint={'center_x':0.5, 'center_y':0.5},
-            size_hint = (0.3, 0.2),            
-            spacing=dp(20)
+            orientation="horizontal",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            size_hint=(0.3, 0.2),
+            spacing=dp(20),
         )
         # Create a ScrollView for the output
         self.output_label = MDTextField(
-            text='Process output..\n', 
-            size_hint=(1, None), pos_hint={'center_x': 0.5}, 
+            text="Process output..\n",
+            size_hint=(1, None),
+            pos_hint={"center_x": 0.5},
             font_size=dp(14),
             multiline=True,
             font_name=self.robofont(),
@@ -65,9 +89,9 @@ class MAC(Screen):
 
         scroll_view = MDScrollView(
             self.output_label,
-            size_hint=(0.9, 1), 
-            do_scroll_x=False, 
-            pos_hint={'center_x': 0.5}
+            size_hint=(0.9, 1),
+            do_scroll_x=False,
+            pos_hint={"center_x": 0.5},
         )
         self.ids.mac_content.clear_widgets()
         self.create_btn.bind(on_press=self.show_command)
@@ -76,38 +100,47 @@ class MAC(Screen):
             self.setting(),
             self.create,
             scroll_view,
-            pos_hint={'center_x':0.5, 'center_y':0.5},
-            orientation='vertical'
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            orientation="vertical",
         )
         self.ids.mac_content.add_widget(layout)
-    
+
     @mainthread
     def start_cmd(self):
-        self.spiner.active= True
-        self.create_btn.disabled=True
-        self.ids.top_bar.disabled=True
+        self.spiner.active = True
+        self.create_btn.disabled = True
+        self.ids.top_bar.disabled = True
         self.create.add_widget(self.cancel)
+
     @mainthread
     def stop_cmd(self):
-        self.spiner.active= False
-        self.create_btn.disabled=False
-        self.ids.top_bar.disabled=False
+        self.spiner.active = False
+        self.create_btn.disabled = False
+        self.ids.top_bar.disabled = False
         self.create.remove_widget(self.cancel)
+
     @multitasking.task
     def execute_command(self, command):
         self.start_cmd()
-        sudo_command = ['sudo', '-S'] + command
-        #print(f'Executing command: {sudo_command}')
-        print(f'Executing...')
-        self.update_output_label(f'Executing...')
+        sudo_command = ["sudo", "-S"] + command
+        # print(f'Executing command: {sudo_command}')
+        print(f"Executing...")
+        self.update_output_label(f"Executing...")
         time.sleep(0.2)
-        
+
         try:
             # Create a pseudo-terminal
             master_fd, slave_fd = pty.openpty()
 
             # Create the subprocess for the sudo command
-            self.process = subprocess.Popen(sudo_command, stdin=slave_fd, stdout=slave_fd, stderr=slave_fd, close_fds=True, universal_newlines=True)
+            self.process = subprocess.Popen(
+                sudo_command,
+                stdin=slave_fd,
+                stdout=slave_fd,
+                stderr=slave_fd,
+                close_fds=True,
+                universal_newlines=True,
+            )
 
             os.close(slave_fd)  # Close the slave_fd in the parent process
 
@@ -122,17 +155,34 @@ class MAC(Screen):
                             self.update_output_label(output.strip())
 
                             # Check if the process is asking for the sudo password
-                            if 'password' in output.lower() and not self.password_prompt_shown:
+                            if (
+                                "password" in output.lower()
+                                and not self.password_prompt_shown
+                            ):
                                 # Show password dialog only when prompted
-                                #print('Asking for sudo password')
+                                # print('Asking for sudo password')
                                 self.password_prompt_shown = True
-                                self.show_password_prompt(lambda password: self.send_sudo_password(password, master_fd))
-                            if 'incorrect' in output.lower() or 'failed' in output.lower():
+                                self.show_password_prompt(
+                                    lambda password: self.send_sudo_password(
+                                        password, master_fd
+                                    )
+                                )
+                            if (
+                                "incorrect" in output.lower()
+                                or "failed" in output.lower()
+                            ):
                                 self.password_prompt_shown = True
-                                self.show_password_prompt(lambda password: self.send_sudo_password(password, master_fd))
+                                self.show_password_prompt(
+                                    lambda password: self.send_sudo_password(
+                                        password, master_fd
+                                    )
+                                )
                             # Check if the process is asking for confirmation (yes/no)
-                            if 'continue' in output.lower() or 'yes/no' in output.lower():
-                                #print('Asking for confirmation')
+                            if (
+                                "continue" in output.lower()
+                                or "yes/no" in output.lower()
+                            ):
+                                # print('Asking for confirmation')
                                 self.send_yes(master_fd)
 
                         if self.process.poll() is not None:
@@ -144,7 +194,7 @@ class MAC(Screen):
             self.password_prompt_shown = False
             os.close(master_fd)
             self.update_output_label("Process finished.\n")
-            
+
             self.stop_cmd()
         except Exception as e:
             print(f"Execution error: {e}")
@@ -159,13 +209,13 @@ class MAC(Screen):
     def send_sudo_password(self, password, master_fd):
         """Send the password to the subprocess."""
         if master_fd:
-            os.write(master_fd, (password + '\n').encode())
+            os.write(master_fd, (password + "\n").encode())
 
     @mainthread
     def send_yes(self, master_fd):
         """Send 'yes' to the subprocess when required."""
         if master_fd:
-            os.write(master_fd, ('yes\n').encode())
+            os.write(master_fd, ("yes\n").encode())
 
     @mainthread
     def update_output_label(self, new_text):
@@ -185,8 +235,9 @@ class MAC(Screen):
     @mainthread
     def show_password_prompt(self, on_submit):
         """Show a dialog for entering the sudo password."""
+
         def on_submit_action(**instance):
-            password = text_field.text.strip()  # Get password            
+            password = text_field.text.strip()  # Get password
             if password:
                 on_submit(password)  # Call the provided callback
                 if self.dialog:
@@ -217,48 +268,65 @@ class MAC(Screen):
             spacing="12dp",
             padding="20dp",
             size_hint_y=None,
-            adaptive_height=True
+            adaptive_height=True,
         )
         self.dialog = MDDialog(
-            title="Enter sudo password",            
-            type='custom',
+            title="Enter sudo password",
+            type="custom",
             content_cls=content,
             buttons=[
-                MDRaisedButton(text='CANCEL', on_release=lambda x: on_cancel(),font_name=self.robofont(),),
-                MDRaisedButton(text='Continue', on_release=lambda x: on_submit_action(),font_name=self.robofont(),),
-            ]
+                MDRaisedButton(
+                    text="CANCEL",
+                    on_release=lambda x: on_cancel(),
+                    font_name=self.robofont(),
+                ),
+                MDRaisedButton(
+                    text="Continue",
+                    on_release=lambda x: on_submit_action(),
+                    font_name=self.robofont(),
+                ),
+            ],
         )
         self.dialog.open()
 
     def show_command(self, instance):
-        command = [f'{self.source_installer}/Contents/Resources/createinstallmedia', '--volume', self.target_volume]
+        command = [
+            f"{self.source_installer}/Contents/Resources/createinstallmedia",
+            "--volume",
+            self.target_volume,
+        ]
         self.execute_command(command)
 
-    def set_text(self, text, target='source'):
+    def set_text(self, text, target="source"):
         print(text)
         if text is not None:
-            if target == 'source':
+            if target == "source":
                 self.source_installer = text
             else:
                 self.target_volume = text
 
     def setting(self):
         """Open the settings dialog to change the image directory."""
+
         @staticmethod
         def get_path(target="target"):
-            selected_dir = filedialog.askdirectory() if target == "target" else filedialog.askopenfilename()
+            selected_dir = (
+                filedialog.askdirectory()
+                if target == "target"
+                else filedialog.askopenfilename()
+            )
             Window.raise_window()  # Bring Kivy window back to focus
             return selected_dir
 
         def set_path(target="target"):
             p = get_path(target)
-            if p != '':
-                if target == 'target':
+            if p != "":
+                if target == "target":
                     self.target_volume = p
                     target_volume.text = p
                     target_volume.focus = True
                     print(p)
-                elif target == 'source':
+                elif target == "source":
                     self.source_installer = p
                     source_installer.text = p
                     source_installer.focus = True
@@ -266,12 +334,12 @@ class MAC(Screen):
 
         source_installer = MDTextField(
             id="source_installer",
-            hint_text='Source Installer',
+            hint_text="Source Installer",
             mode="rectangle",
             font_name=self.robofont(),
             multiline=False,
             text=self.source_installer if self.source_installer else "",
-            on_text=lambda x: self.set_text(x.text, 'source'),
+            on_text=lambda x: self.set_text(x.text, "source"),
             size_hint_y=None,
             height="40dp",
         )
@@ -280,7 +348,7 @@ class MAC(Screen):
             size_hint_y=None,
             font_name=self.robofont(),
             height="40dp",
-            on_release=lambda *args: set_path('source')
+            on_release=lambda *args: set_path("source"),
         )
 
         target_volume = MDTextField(
@@ -290,7 +358,7 @@ class MAC(Screen):
             font_name=self.robofont(),
             multiline=False,
             text=self.target_volume if self.target_volume else "",
-            on_text=lambda x: self.set_text(x.text, 'target'),
+            on_text=lambda x: self.set_text(x.text, "target"),
             size_hint_y=None,
             height="40dp",
         )
@@ -299,7 +367,7 @@ class MAC(Screen):
             size_hint_y=None,
             font_name=self.robofont(),
             height="40dp",
-            on_release=lambda *args: set_path('target')
+            on_release=lambda *args: set_path("target"),
         )
 
         content = MDBoxLayout(
@@ -311,26 +379,6 @@ class MAC(Screen):
             spacing="12dp",
             padding="20dp",
             size_hint_y=None,
-            adaptive_height=True
+            adaptive_height=True,
         )
         return content
-# PyInstaller Configuration
-# if __name__ == '__main__':
-#     try:
-#         if hasattr(sys, '_MEIPASS'):            
-#             resource_add_path(os.path.join(sys._MEIPASS))
-#         app = MAC()
-#         # Use logging
-#         print("Application started")
-#         app.run()
-#     except Exception as e:
-#         #logger.exception('Error')
-        
-#         """
-#         If the app encounters an error it automatically saves the
-#         error in a file called ERROR.log.
-#         You can use this for BugReport purposes.
-#         """
-#         print(traceback.format_exc())
-#         with open('error.log', "w") as error_file:
-#             error_file.write(f'{e}: \n{traceback.format_exc()}')

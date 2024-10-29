@@ -1,0 +1,142 @@
+<WIN_WIN>:
+    name: 'win_win'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20,0,20,0]
+        #pos_hint: {'center_x':0.5, 'center_y':0.5}
+        size_hint: 1,1
+        MDTopAppBar:
+            id: top_bar
+            title: "Create Windows installer"
+            md_bg_color:  0,0,0,0.00001
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: app.goto('home','right')]]  # Back button
+            size_hint_y: 0.1
+            pos_hint: {'top':1}
+        
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: "12dp"
+            padding: dp(20)
+            size_hint_y: None
+            adaptive_height: True
+            
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "12dp"
+                size_hint_y: None
+                adaptive_height: True
+                MDTextField:
+                    id: source_installer
+                    hint_text: 'Source Installer'
+                    mode: "rectangle"
+                    multiline: False
+                    #text: root.get_default_text('source') if root.get_default_text('source') else ""
+                    on_text: root.set_text(self.text, 'source')
+                    size_hint_y: None
+                    height: "40dp"
+
+                MDRaisedButton:
+                    text: "Browse"
+                    size_hint_y: None
+                    height: "40dp"
+                    on_release: root.set_path('source')
+                    pos_hint:{'center_x':0.5, 'center_y':0.5}
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "12dp"
+                size_hint_y: None
+                adaptive_height: True
+
+                MDTextField:
+                    id: target_disk
+                    hint_text: "Target Disk"
+                    mode: "rectangle"
+                    multiline: False
+                    disabled: True
+                    size_hint_y: None
+                    height: "40dp"               
+
+                MDRaisedButton:
+                    text: "Select"
+                    size_hint_y: None
+                    height: "40dp"
+                    on_release: root.select_disk()
+                    pos_hint:{'center_x':0.5, 'center_y':0.5}
+            
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "12dp"
+                size_hint_y: None
+                adaptive_height: True
+                MDTextField:
+                    id: target_label
+                    hint_text: 'Target Label'
+                    mode: "rectangle"
+                    multiline: False
+                    on_text: root.set_text(self.text, 'label')
+                    size_hint_y: None
+                    height: "40dp"
+                MDTextField:
+                    id: target_volume_format
+                    hint_text: "Will format as (fat32, ntfs, exfat)"
+                    mode: "rectangle"
+                    multiline: False
+                    #text: root.get_default_text('format') if root.get_default_text('format') else ""
+                    on_text: root.set_text(self.text, 'format')
+                    size_hint_y: None
+                    height: "40dp"
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "12dp"
+                size_hint_y: None
+                adaptive_height: True
+                MDTextField:
+                    id: target_scheme
+                    hint_text: '*Target Scheme (mbr/gpt)'
+                    mode: "rectangle"
+                    multiline: False
+                    on_text: root.set_text(self.text, 'scheme')
+                    size_hint_y: None
+                    height: "40dp"
+                MDTextField:
+                    id: target_size
+                    hint_text: "Installer volume size (MB)"
+                    mode: "rectangle"
+                    multiline: False
+                    on_text: root.set_text(self.text, 'size')
+                    size_hint_y: None
+                    height: "40dp"
+            MDLabel:
+                id: target_scheme_info
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                halign: "left"
+                font_size: dp(12)
+                disabled: True
+                padding: [10, 10]
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "12dp"
+                size_hint_y: None
+                adaptive_height: True
+                spacing: dp(10)
+                size_hint: 1, None
+                
+                MDCheckbox:
+                    id: bypass_tpm
+                    size_hint: None, None
+                    size: "48dp", "48dp"
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    on_active: root.bypass_tpm_check(*args)
+                MDLabel:
+                    text: "Bypass TPM check"
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    halign: "left"
+                    disabled: True
+                
+           
+                
+        BoxLayout:
+            id: win_content
+            orientation: 'vertical'
+            pos_hint:{'center_x':0.5, 'center_y':0.5}

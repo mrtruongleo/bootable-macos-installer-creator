@@ -3,19 +3,12 @@
     BoxLayout:
         orientation: 'vertical'
         padding: [10,0,10,0]
-        size_hint: 1,1
-        MDTopAppBar:
-            id: title
-            title: "Create MacOS/Windows installer"
-            md_bg_color:  0,0,0,0.00001
-            elevation: 0
-            size_hint_y: 0.1
-            pos_hint: {'top':1}
+        #size_hint: 1,1
         MDBoxLayout:
             orientation: 'vertical'
             spacing: 40
             #size_hint_y: 0.8
-            size_hint: 1, 0.3
+            size_hint: 1, 0.4
             pos_hint: {'center_x':0.5, 'center_y':0.5}
             MDRectangleFlatButton:
                 text: "Create MacOS Installer"
@@ -23,9 +16,16 @@
                 pos_hint: {'center_x':0.5, 'center_y':0.5}
                 padding: 20
                 font_size: dp(20)
+                disabled: app.is_windows
             MDRectangleFlatButton:
                 text: "Create Windows Installer"
                 on_release: app.goto('win')
+                pos_hint: {'center_x':0.5, 'center_y':0.5}
+                padding: 20
+                font_size: dp(20)
+            MDRectangleFlatButton:
+                text: "Download Bootcamp Support Driver"
+                on_release: app.goto('bootcamp')
                 pos_hint: {'center_x':0.5, 'center_y':0.5}
                 padding: 20
                 font_size: dp(20)

@@ -1,0 +1,120 @@
+<Bootcamp>:
+    name: 'bootcamp'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20,0,20,0]
+        #pos_hint: {'center_x':0.5, 'center_y':0.5}
+        size_hint: 1,1
+        MDTopAppBar:
+            id: top_bar
+            title: "Download Bootcamp Support"
+            md_bg_color:  0,0,0,0.00001
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: app.goto('home','right')]]  # Back button
+            size_hint_y: 0.1
+            pos_hint: {'top':1}
+        
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: "12dp"
+            padding: dp(20)
+            pos_hint: {'top':1 - (top_bar.height + dp(5))/root.height}
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "12dp"
+                size_hint_y: None
+                adaptive_height: True
+                MDTextField:
+                    id: model
+                    font_name: app.robofont()
+                    hint_text: 'Select Model (ex: MacBookPro9,2)'
+                    mode: "rectangle"
+                    multiline: False
+                    on_text: root.set_model(self.text)
+                    size_hint_y: None
+                    height: "40dp"
+
+                MDRaisedButton:
+                    text: "Select"
+                    font_name: app.robofont()
+                    size_hint_y: None
+                    height: "40dp"
+                    on_release: root.select_model()
+                    pos_hint:{'center_x':0.5, 'center_y':0.5}
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "12dp"
+                size_hint_y: None
+                adaptive_height: True
+
+                MDTextField:
+                    id: save_to
+                    hint_text: "Save to"
+                    font_name: app.robofont()
+                    mode: "rectangle"
+                    multiline: False
+                    disabled: True
+                    size_hint_y: None
+                    height: "40dp"               
+
+                MDRaisedButton:
+                    text: "Select"
+                    font_name: app.robofont()
+                    size_hint_y: None
+                    height: "40dp"
+                    on_release: root.select_folder()
+                    pos_hint:{'center_x':0.5, 'center_y':0.5}
+            
+            MDBoxLayout:
+                orientation: "vertical"
+                padding:[0, dp(20)]
+                size_hint_y: None
+                adaptive_height: True
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    spacing: "12dp"
+                    size_hint_y: None
+                    adaptive_height: True
+                    MDRaisedButton:
+                        id: download_btn
+                        text: "Download"
+                        font_name: app.robofont()
+                        on_release: root.download()
+                        size_hint: 0.8,None
+                        height: "40dp"
+                        padding:[dp(10)]
+                        pos_hint:{'center_x':0.5, 'center_y':0.5}
+                    MDSpinner:
+                        id: spiner
+                        active:False
+                        size_hint: None, None
+                        size: (30, 30)
+                        pos_hint:{"center_x": 0.5, "center_y": 0.5}
+            MDLabel:
+                font_name: app.robofont()
+                text: "Progress:"
+                size_hint:(1, None)
+                height:dp(20)
+                disabled: True
+            ProgressBar:
+                id: progress_bar
+                value:0
+                max:100
+                size_hint:(1, None)
+                height:dp(10)
+                pos_hint:{"center_x": 0.5, "center_y": 0.5}
+            MDScrollView:
+                size_hint:(1, 1)
+                do_scroll_x:False
+                pos_hint:{"center_x": 0.5}
+                MDTextField:
+                    id: output_label
+                    text:" "
+                    font_name: app.robofont()
+                    size_hint:1, None
+                    pos_hint:{"center_x": 0.5}
+                    font_size:dp(12)
+                    multiline:True
+                    line_color_normal:[1, 1, 1, 0]
+                    line_color_focus:[1, 1, 1, 0]
+                    padding:[dp(10)]
