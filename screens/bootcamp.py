@@ -19,8 +19,6 @@ from utils.components import ModelList
 from utils.models import Models
 
 
-
-
 class Bootcamp(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -101,9 +99,11 @@ class Bootcamp(Screen):
     def update_output_label(self, message):
         self.ids.output_label.text += f"{message}\n"
         print(message)
+
     @mainthread
     def update_progress(self, value):
         self.ids.progress_bar.value = value
+
     @mainthread
     def start_cmd(self):
         self.ids.spiner.active = True
@@ -120,51 +120,59 @@ class Bootcamp(Screen):
         else:
             self.update_output_label("Please select model and target location.")
 
-    
     def main_execute(self):
         self.start_cmd()
-        #time.sleep(1)
+        # time.sleep(1)
         if self.app.is_windows:
             self.update_output_label("\nProcessing...")
             if not self.process:
                 self.execute_command(
-                    [os.path.join(self.app.exe_path,"brigadier.exe"), "-m", f"{self.model}", "-o", f"{self.save_to}"]
+                    [
+                        os.path.join(self.app.exe_path, "brigadier.exe"),
+                        "-m",
+                        f"{self.model}",
+                        "-o",
+                        f"{self.save_to}",
+                    ]
                 )
         else:
-            self.update_output_label("\nNot support this function on Mac devices yet! Using windows version please!")
+            self.update_output_label(
+                "\nNot support this function on Mac devices yet! Using windows version please!"
+            )
             self.stop_cmd()
+
     @multitasking.task
     def execute_command(self, command):
         downloading = None
         output_path = None
         try:
             # Debug output
-            #self.update_output_label(f"Executing command: {' '.join(command)}")
-            
+            # self.update_output_label(f"Executing command: {' '.join(command)}")
+
             self.process = subprocess.Popen(
                 command,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,  # Merge stderr into stdout
                 universal_newlines=True,
                 bufsize=1,
-                shell=True  # Try with shell=True to handle Windows paths better
+                shell=True,  # Try with shell=True to handle Windows paths better
             )
 
             # Read output in chunks
-            
+
             while True:
                 output = self.process.stdout.readline()
-                if output == '' and self.process.poll() is not None:
+                if output == "" and self.process.poll() is not None:
                     break
                 if output:
-                    output = output.strip()                  
-                    
+                    output = output.strip()
+
                     # Handle progress updates
-                    if '%' in output:
+                    if "%" in output:
                         if not downloading:
                             self.update_output_label("\nDownloading...")
                             downloading = True
-                        match = re.search(r'(\d+\.?\d*)%', output.strip())
+                        match = re.search(r"(\d+\.?\d*)%", output.strip())
                         if match:
                             self.update_progress(float(match.group(1)))
                     else:
@@ -172,14 +180,18 @@ class Bootcamp(Screen):
                             self.update_output_label(output.strip())
                         elif "Making directory" in output:
                             self.update_output_label(output.strip())
-                            output_path = output.strip().split("Making directory ")[1].replace('..', '')
+                            output_path = (
+                                output.strip()
+                                .split("Making directory ")[1]
+                                .replace("..", "")
+                            )
                         elif "Fetching Boot Camp product" in output:
                             self.update_output_label(output.strip())
                         elif "Extracting" in output:
                             self.update_output_label(output.strip())
                         elif "Done." in output:
                             self.update_output_label(output.strip())
-                        print(f"Debug: {output}")  # Console debug output
+                        print(f"{output}")  # Console debug output
 
         except Exception as e:
             self.update_output_label(f"Error: {e}")
