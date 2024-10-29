@@ -1,40 +1,29 @@
-'super' object has no attribute '__getattr__': 
+No module named 'elevate': 
 Traceback (most recent call last):
-  File "kivy/properties.pyx", line 961, in kivy.properties.ObservableDict.__getattr__
-KeyError: 'target_label'
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/main.py", line 129, in <module>
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\main.py", line 129, in <module>
     app.run()
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/app.py", line 956, in run
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\env\Lib\site-packages\kivy\app.py", line 956, in run
     runTouchApp()
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/base.py", line 574, in runTouchApp
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\env\Lib\site-packages\kivy\base.py", line 574, in runTouchApp
     EventLoop.mainloop()
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/base.py", line 339, in mainloop
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\env\Lib\site-packages\kivy\base.py", line 339, in mainloop
     self.idle()
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/base.py", line 379, in idle
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\env\Lib\site-packages\kivy\base.py", line 379, in idle
     Clock.tick()
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/clock.py", line 733, in tick
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\env\Lib\site-packages\kivy\clock.py", line 733, in tick
     self.post_idle(ts, self.idle())
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/clock.py", line 776, in post_idle
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\env\Lib\site-packages\kivy\clock.py", line 776, in post_idle
     self._process_events()
-  File "kivy/_clock.pyx", line 620, in kivy._clock.CyClockBase._process_events
-  File "kivy/_clock.pyx", line 653, in kivy._clock.CyClockBase._process_events
-  File "kivy/_clock.pyx", line 649, in kivy._clock.CyClockBase._process_events
-  File "kivy/_clock.pyx", line 218, in kivy._clock.ClockEvent.tick
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/animation.py", line 370, in _update
-    self.stop(widget)
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/animation.py", line 236, in stop
-    self.dispatch('on_complete', widget)
-  File "kivy/_event.pyx", line 727, in kivy._event.EventDispatcher.dispatch
-  File "kivy/_event.pyx", line 1307, in kivy._event.EventObservers.dispatch
-  File "kivy/_event.pyx", line 1231, in kivy._event.EventObservers._dispatch
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/env/lib/python3.10/site-packages/kivy/uix/screenmanager.py", line 419, in _on_complete
-    self.screen_in.dispatch('on_enter')
-  File "kivy/_event.pyx", line 731, in kivy._event.EventDispatcher.dispatch
-  File "/Volumes/SSD.DATA/Leo/CODING/PYTHON/DEV/bootableMacos/screens/win.py", line 61, in on_enter
-    self.ids.target_label.text = self.target_volume_label
-  File "kivy/properties.pyx", line 964, in kivy.properties.ObservableDict.__getattr__
-AttributeError: 'super' object has no attribute '__getattr__'
+  File "kivy\\_clock.pyx", line 620, in kivy._clock.CyClockBase._process_events
+  File "kivy\\_clock.pyx", line 653, in kivy._clock.CyClockBase._process_events
+  File "kivy\\_clock.pyx", line 649, in kivy._clock.CyClockBase._process_events
+  File "kivy\\_clock.pyx", line 218, in kivy._clock.ClockEvent.tick
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\env\Lib\site-packages\kivy\clock.py", line 1095, in callback_func
+    func(*args, **kwargs)
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\main.py", line 109, in generate_screen
+    from screens.win_win import WIN_WIN
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\screens\win_win.py", line 22, in <module>
+    from utils import mount as iso
+  File "C:\Users\Rayac\Desktop\bootable-macos-installer-creator\utils\mount.py", line 3, in <module>
+    from elevate import elevate
+ModuleNotFoundError: No module named 'elevate'
