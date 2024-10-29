@@ -1,7 +1,8 @@
 # Bootable macOS Installer Creator
 
-![Preview](https://github.com/mrtruongleo/bootable-macos-installer-creator/blob/main/screen.jpg)
-
+![Preview](https://github.com/mrtruongleo/bootable-macos-installer-creator/blob/main/screenshots/mac-installer.jpg)
+![Preview](https://github.com/mrtruongleo/bootable-macos-installer-creator/blob/main/screenshots/win-installer.png)
+![Preview](https://github.com/mrtruongleo/bootable-macos-installer-creator/blob/main/screenshots/download_bootcamp.png)
 This Kivy application allows you to create a bootable macOS/Windows installer for USB drives or hard disk partitions.
 
 ## Features
