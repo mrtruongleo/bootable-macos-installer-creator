@@ -1,7 +1,8 @@
 import subprocess
 import sys, os
 import re
-from elevate import elevate
+
+# from elevate import elevate
 from utils.func import find_drive, get_disk_size
 
 
@@ -101,7 +102,7 @@ def get_first_drive_letter_by_disk_number(disk_number):
 
 def run_command(command, input=None):
     """Run a command without opening a new window."""
-    elevate(show_console=False)
+    # elevate(show_console=False)
     startupinfo = subprocess.STARTUPINFO()
     startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     try:

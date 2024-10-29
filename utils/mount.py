@@ -1,6 +1,6 @@
 import subprocess
 
-from elevate import elevate
+# from elevate import elevate
 
 
 def mount_iso(iso_path, update_output_label=None):
@@ -50,9 +50,9 @@ def mount_iso(iso_path, update_output_label=None):
 
 def unmount_iso(iso_path, update_output_label=None):
     # Elevate privileges to run the command as an administrator
-    elevate(
-        show_console=False
-    )  # Automatically elevates the process (no need for PowerShell RunAs)
+    # elevate(
+    #     show_console=False
+    # )  # Automatically elevates the process (no need for PowerShell RunAs)
     if update_output_label:
         update_output_label(f"Unmounting ISO: {iso_path}")
     try:
