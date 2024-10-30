@@ -1,4 +1,4 @@
-# Bootable macOS Installer Creator
+# Bootable macOS/Windows Installer Creator
 
 ![Preview](https://github.com/mrtruongleo/bootable-macos-installer-creator/blob/main/screenshots/mac-installer.jpg)
 ![Preview](https://github.com/mrtruongleo/bootable-macos-installer-creator/blob/main/screenshots/win-installer.png)

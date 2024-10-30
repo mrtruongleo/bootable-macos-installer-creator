@@ -19,7 +19,7 @@
 
 ### Step 2: Boot into a WinPE Environment (Using USB) or Another Tool with Windows Command-Line Access
 
-1. Create a bootable USB drive with WinPE or a similar tool that provides access to Windows command-line utilities (e.g., Anhdvboot).
+1. Create a bootable USB drive with WinPE or a similar tool that provides access to Windows command-line utilities (e.g., Anhdvboot: https://anhdvboot.com/en/download/).
 2. Boot the MacBook from the USB. You can boot the USB in UEFI mode.
 
 ### Step 3: Format the Boot Camp Partition for BIOS Legacy Mode
@@ -72,6 +72,7 @@ After applying the Windows image, set up the bootloader on the Boot Camp partiti
 bcdboot E:\Windows /s E: /f BIOS
 bootsect /nt60 E: /mbr
 ```
+- `E:` is the Boot Camp partition.
 
 This will make the Boot Camp partition bootable in BIOS mode.
 
